@@ -16,7 +16,7 @@ export const Pagination = ({
         mr-2
         ${
           previousPage !== null
-            ? "text-blue-600 hover:text-blue-800 cursor-pointer"
+            ? "text-blue-600 hover:text-blue-800 cursor-pointer dark:text-white"
             : "text-gray-500"
         }`}
         onClick={previousPage !== null ? onHandlePrevious : () => {}}
@@ -30,7 +30,7 @@ export const Pagination = ({
   ml-2
   ${
     previousPage !== null
-      ? "text-blue-600 hover:text-blue-800 cursor-pointer"
+      ? "text-blue-600 hover:text-blue-800 cursor-pointer dark:text-white"
       : "text-gray-500"
   }`}
       >

@@ -3,6 +3,7 @@ import { Pokemon, SimplePokemon } from "../../types";
 import { Skeleton } from "../Skeleton";
 import { Label } from "../Label";
 import { PokemonService } from "../../services/pokemon";
+import { useNavigate } from "react-router";
 
 interface CardProps {
   simplePokemon?: SimplePokemon;
@@ -12,6 +13,8 @@ interface CardProps {
 export const Card: FC<CardProps> = ({ simplePokemon, pokemonSearched }) => {
   const [pokemon, setPokemon] = useState<Pokemon>();
   const [isLoading, setIsLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const getPokemon = useCallback(async () => {
     setIsLoading(true);
@@ -35,14 +38,37 @@ export const Card: FC<CardProps> = ({ simplePokemon, pokemonSearched }) => {
     }
   }, [getPokemon, pokemonSearched]);
 
+  const handleDetailsPage = (id?: number) => {
+    if (!id) return;
+
+    navigate(`/details/${id}`);
+  };
+
   return (
-    <div className=" h-44 w-52 bg-white hover:bg-blue-300 transition m-5 flex justify-between rounded-md cursor-pointer shadow-xl">
+    <div
+      className=" 
+    h-44 
+    w-52
+    bg-white
+    hover:bg-blue-300 
+    transition 
+    m-5 
+    flex 
+    justify-between 
+    rounded-md 
+    cursor-pointer 
+    shadow-xl
+    dark:bg-gray-900 
+    hover:dark:bg-gray-500
+    "
+      onClick={() => handleDetailsPage(pokemon?.id)}
+    >
       {isLoading ? (
         <div className="w-full h-full">
           <Skeleton />
         </div>
       ) : (
-        <div className="w-full h-full flex flex-col">
+        <div className="w-full h-full flex flex-col dark:text-white">
           <div className="w-full flex justify-around items-center mt-2">
             <h2 className="text-2lx font-medium">{pokemon?.name}</h2>
             <p className="text-xl font-normal">{`#${pokemon?.order}`}</p>
